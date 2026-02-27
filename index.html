@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Олимпиадная математика — курсы и каталог задач</title>
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --card:#11131a;
+      --muted:#9aa3b2;
+      --text:#e9eef7;
+      --line:#232635;
+      --accent:#7c5cff;
+      --accent2:#2ee59d;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --r:18px;
+      --w:1080px;
+      --pad:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 600px at 30% -10%, rgba(124,92,255,.18), transparent 70%),
+                  radial-gradient(900px 500px at 80% 10%, rgba(46,229,157,.12), transparent 70%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.35;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--w); margin:0 auto; padding:0 18px}
+    .topbar{
+      position:sticky; top:0;
+      backdrop-filter: blur(10px);
+      background: rgba(11,12,16,.65);
+      border-bottom:1px solid rgba(35,38,53,.8);
+      z-index:50;
+    }
+    .topbar .row{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:99px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(124,92,255,.12);
+    }
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border:1px solid rgba(35,38,53,.9);
+      background: rgba(17,19,26,.6);
+      border-radius: 12px;
+      color:var(--text);
+      cursor:pointer;
+      transition:.15s ease;
+      user-select:none;
+      font-weight:600;
+      font-size:14px;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(124,92,255,.55)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(46,229,157,.85));
+      border:0;
+      color:#0b0c10;
+      box-shadow: 0 12px 30px rgba(124,92,255,.18);
+    }
+    .btn.ghost{
+      background:transparent;
+    }
+    .hero{
+      padding:46px 0 18px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns:1fr}
+    }
+    .card{
+      background: rgba(17,19,26,.72);
+      border:1px solid rgba(35,38,53,.9);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+    }
+    .heroCard{
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width:260px; height:260px;
+      background: radial-gradient(circle at 30% 30%, rgba(46,229,157,.26), transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(124,92,255,.22), transparent 60%);
+      transform: rotate(18deg);
+      filter: blur(1px);
+    }
+    .kicker{
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+      margin-bottom:10px;
+    }
+    h1{
+      margin:0 0 10px 0;
+      font-size:40px;
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    @media(max-width:520px){ h1{font-size:32px} }
+    .sub{
+      margin:0 0 18px 0;
+      color:rgba(233,238,247,.82);
+      font-size:16px;
+      max-width:62ch;
+    }
+    .heroActions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .mini{
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .mini h3{
+      margin:0;
+      font-size:16px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(35,38,53,.9);
+      background: rgba(11,12,16,.35);
+      color:rgba(233,238,247,.85);
+      font-weight:650;
+      font-size:13px;
+      width:max-content;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media(max-width:900px){ .grid3{grid-template-columns:1fr} }
+    section{padding:18px 0}
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; margin:0 0 12px 0;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-.01em;
+    }
+    .hint{color:var(--muted); font-size:13px}
+    .course{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:160px;
+    }
+    .course .meta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    .course .title{font-size:16px; font-weight:800; margin:0}
+    .course .desc{margin:0; color:rgba(233,238,247,.82); font-size:14px}
+    .course .bottom{margin-top:auto; display:flex; gap:10px; flex-wrap:wrap}
+    .tag{
+      display:inline-flex;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(35,38,53,.9);
+      background: rgba(11,12,16,.35);
+      color:rgba(233,238,247,.78);
+      font-size:12px;
+      font-weight:650;
+    }
+    .panel{
+      padding:18px;
+    }
+    .filters{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-bottom:12px;
+      align-items:center;
+    }
+    input, select{
+      background: rgba(11,12,16,.35);
+      border:1px solid rgba(35,38,53,.9);
+      color:var(--text);
+      border-radius: 12px;
+      padding:10px 12px;
+      font-size:14px;
+      outline:none;
+    }
+    input::placeholder{color:rgba(154,163,178,.7)}
+    .tasks{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media(max-width:900px){ .tasks{grid-template-columns:1fr} }
+    .task{
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .task .name{margin:0; font-weight:800; font-size:14px}
+    .task .line{color:rgba(233,238,247,.8); font-size:13px}
+    .task .bottom{margin-top:auto; display:flex; gap:10px; flex-wrap:wrap}
+    .muted{color:var(--muted)}
+    .accordion{
+      padding:10px 18px 18px;
+    }
+    details{
+      border:1px solid rgba(35,38,53,.9);
+      background: rgba(11,12,16,.25);
+      border-radius: 14px;
+      padding:12px 14px;
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary .chev{
+      width:10px; height:10px;
+      border-right:2px solid rgba(233,238,247,.65);
+      border-bottom:2px solid rgba(233,238,247,.65);
+      transform: rotate(-45deg);
+      transition: .15s ease;
+      flex:0 0 auto;
+    }
+    details[open] summary .chev{transform: rotate(45deg)}
+    .foot{
+      padding:18px 0 40px;
+      color:rgba(233,238,247,.7);
+      font-size:13px;
+    }
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media(max-width:900px){ .split{grid-template-columns:1fr} }
+    .small{font-size:12px;color:rgba(233,238,247,.7)}
+    .hr{height:1px;background:rgba(35,38,53,.85);margin:14px 0}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="row">
+        <div class="brand">
+          <span class="dot"></span>
+          <span>Олимпиадная математика</span>
+        </div>
+        <nav>
+          <a class="btn ghost" href="#courses">Курсы</a>
+          <a class="btn ghost" href="#tasks">Каталог задач</a>
+          <a class="btn" id="loginBtn" href="YOUR_LK_LINK">Войти</a>
+          <a class="btn primary" id="buyBtn" href="YOUR_PAYMENT_LINK">Купить</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="heroGrid">
+        <div class="card heroCard">
+          <div class="kicker">подготовка к классическим олимпиадам</div>
+          <h1>ВсОШ • ММО • Турнир городов</h1>
+          <p class="sub">
+            Курсы и задачи без воды: короткая теория → много практики → разбор типовых ходов.
+            Формат: занятия с видео + PDF, плюс каталог задач по темам.
+          </p>
+          <div class="heroActions">
+            <a class="btn primary" href="YOUR_TG_LINK">Написать в TG</a>
+            <a class="btn" href="#courses">Смотреть курсы</a>
+            <a class="btn" href="#tasks">Открыть каталог задач</a>
+          </div>
+          <div class="hr"></div>
+          <div class="split">
+            <div class="pill">✅ После оплаты доступ выдаётся автоматически</div>
+            <div class="pill">📌 Занятия: видео + PDF + ДЗ</div>
+          </div>
+          <p class="small" style="margin-top:12px">
+            Ссылки “Войти/Купить” сейчас заглушки. Заменишь на реальные ссылки от твоей платформы оплаты/ЛК.
+          </p>
+        </div>
+
+        <div class="card mini">
+          <div>
+            <h3 style="margin:0 0 6px 0;">Как это работает</h3>
+            <div class="muted" style="font-size:14px">
+              1) Выбираешь курс или подписку<br/>
+              2) Оплачиваешь<br/>
+              3) Получаешь доступ в ЛК<br/>
+              4) Смотришь уроки и решаешь задачи
+            </div>
+          </div>
+          <div class="grid3" style="grid-template-columns:1fr;gap:10px">
+            <div class="pill">🎯 Фокус: “красивые ответы”</div>
+            <div class="pill">🧩 По темам и по сложности</div>
+            <div class="pill">⚡ Компактно, без растягивания на экран</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="courses">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Курсы</h2>
+          <div class="hint">3 примера. Заменишь названия/цены/ссылки.</div>
+        </div>
+
+        <div class="grid3">
+          <div class="card course">
+            <div class="meta">
+              <span class="tag">8–9 класс</span>
+              <span class="tag">ВсОШ</span>
+              <span class="tag">12 занятий</span>
+            </div>
+            <p class="title">Курс “База + скорость”</p>
+            <p class="desc">Фундаментальные приёмы + тренировка типовых задач. Много ФСУ, делимость, комбинаторика.</p>
+            <div class="bottom">
+              <a class="btn primary" href="YOUR_PAYMENT_LINK">Купить</a>
+              <a class="btn" href="YOUR_COURSE_PAGE_LINK">Подробнее</a>
+            </div>
+          </div>
+
+          <div class="card course">
+            <div class="meta">
+              <span class="tag">8–9 класс</span>
+              <span class="tag">ММО</span>
+              <span class="tag">10 занятий</span>
+            </div>
+            <p class="title">Курс “ММО: техника решений”</p>
+            <p class="desc">Задачи уровня “вторая задача в варианте”: приёмы, структуры, разборы, самостоятельные листки.</p>
+            <div class="bottom">
+              <a class="btn primary" href="YOUR_PAYMENT_LINK">Купить</a>
+              <a class="btn" href="YOUR_COURSE_PAGE_LINK">Подробнее</a>
+            </div>
+          </div>
+
+          <div class="card course">
+            <div class="meta">
+              <span class="tag">Подписка</span>
+              <span class="tag">Каталог</span>
+              <span class="tag">обновления</span>
+            </div>
+            <p class="title">Подписка “Каталог задач”</p>
+            <p class="desc">Фильтры по темам/классам/сложности. Условия и решения (или часть — платно).</p>
+            <div class="bottom">
+              <a class="btn primary" href="YOUR_PAYMENT_LINK">Оформить</a>
+              <a class="btn" href="#tasks">Открыть каталог</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tasks">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Каталог задач</h2>
+          <div class="hint">Поиск + фильтры работают локально. Данные внизу в массиве.</div>
+        </div>
+
+        <div class="card panel">
+          <div class="filters">
+            <input id="q" placeholder="Поиск: ФСУ, делимость, графы..." />
+            <select id="grade">
+              <option value="">Класс: любой</option>
+              <option value="6-7">6–7</option>
+              <option value="8-9">8–9</option>
+              <option value="10-11">10–11</option>
+            </select>
+            <select id="topic">
+              <option value="">Тема: любая</option>
+              <option value="ФСУ">ФСУ</option>
+              <option value="Делимость">Делимость</option>
+              <option value="Комбинаторика">Комбинаторика</option>
+              <option value="Графы">Графы</option>
+              <option value="Алгебра">Алгебра</option>
+            </select>
+            <select id="level">
+              <option value="">Сложность: любая</option>
+              <option value="easy">easy</option>
+              <option value="normal">normal</option>
+              <option value="hard">hard</option>
+            </select>
+            <button class="btn" id="reset">Сброс</button>
+          </div>
+
+          <div class="tasks" id="tasksGrid"></div>
+
+          <div class="hr"></div>
+          <div class="small">
+            Чтобы “Решение” было доступно только оплатившим: в реальном проекте это завязывается на ЛК/доступ.
+            Здесь кнопка “Решение” ведёт на заглушку <span class="tag">YOUR_LK_LINK</span>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>FAQ</h2>
+          <div class="hint">Аккордеон — как ты просил.</div>
+        </div>
+
+        <div class="card accordion">
+          <details>
+            <summary>Как получить доступ после оплаты? <span class="chev"></span></summary>
+            <div class="muted" style="margin-top:10px">
+              После оплаты тебе приходит письмо/сообщение с логином, и в личном кабинете открывается купленный курс/подписка.
+            </div>
+          </details>
+          <details>
+            <summary>Что внутри занятия? <span class="chev"></span></summary>
+            <div class="muted" style="margin-top:10px">
+              Видео + PDF (теория/листок) + домашка. Всё разбито по занятиям.
+            </div>
+          </details>
+          <details>
+            <summary>Можно ли купить только каталог задач? <span class="chev"></span></summary>
+            <div class="muted" style="margin-top:10px">
+              Да. Каталог можно продавать как отдельную подписку.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="card panel" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div>
+            <div class="kicker" style="margin:0 0 6px 0;">готов начать</div>
+            <div style="font-weight:900;font-size:18px">Напиши в Telegram — дам подходящий курс и план</div>
+            <div class="muted" style="margin-top:6px">Заменишь ссылку на TG в шапке и в кнопке ниже.</div>
+          </div>
+          <a class="btn primary" href="YOUR_TG_LINK">Написать в TG</a>
+        </div>
+
+        <div class="foot">
+          <div class="hr"></div>
+          <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div>© <span id="y"></span> Олимпиадная математика</div>
+            <div class="muted">Оферта / Политика — добавишь позже</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ====== НАСТРОЙКИ (ЗАМЕНИ НА СВОИ ССЫЛКИ) ======
+    const LINKS = {
+      TG: "YOUR_TG_LINK",
+      LK: "YOUR_LK_LINK",
+      PAY: "YOUR_PAYMENT_LINK",
+      COURSE_PAGE: "YOUR_COURSE_PAGE_LINK"
+    };
+
+    // Проставим в кнопки, чтобы не искать по тексту.
+    document.querySelectorAll('a[href="YOUR_TG_LINK"]').forEach(a => a.href = LINKS.TG);
+    document.querySelectorAll('a[href="YOUR_LK_LINK"]').forEach(a => a.href = LINKS.LK);
+    document.querySelectorAll('a[href="YOUR_PAYMENT_LINK"]').forEach(a => a.href = LINKS.PAY);
+    document.querySelectorAll('a[href="YOUR_COURSE_PAGE_LINK"]').forEach(a => a.href = LINKS.COURSE_PAGE);
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // ====== ДАННЫЕ ЗАДАЧ (МЕНЯЕШЬ/ДОБАВЛЯЕШЬ) ======
+    const TASKS = [
+      { id: 1, name: "ФСУ-1. Схлопнуть выражение до константы", topic: "ФСУ", grade: "8-9", level: "normal", free: true },
+      { id: 2, name: "ФСУ-2. Произведение скобок = разложенный куб", topic: "ФСУ", grade: "8-9", level: "hard", free: false },
+      { id: 3, name: "Делимость-1. Остатки и разность степеней", topic: "Делимость", grade: "8-9", level: "normal", free: true },
+      { id: 4, name: "Комбинаторика-1. Инвариант/процесс", topic: "Комбинаторика", grade: "6-7", level: "normal", free: true },
+      { id: 5, name: "Графы-1. Циклы и ломающее множество", topic: "Графы", grade: "10-11", level: "hard", free: false },
+      { id: 6, name: "Алгебра-1. Разложение и красивые ответы", topic: "Алгебра", grade: "8-9", level: "easy", free: true },
+      { id: 7, name: "ФСУ-3. Длинная дробь, всё сокращается", topic: "ФСУ", grade: "8-9", level: "normal", free: false },
+      { id: 8, name: "Делимость-2. Сумма/разность кубов", topic: "Делимость", grade: "8-9", level: "easy", free: true },
+      { id: 9, name: "Комбинаторика-2. Подсчёт через дополнение", topic: "Комбинаторика", grade: "8-9", level: "normal", free: false },
+    ];
+
+    const els = {
+      q: document.getElementById('q'),
+      grade: document.getElementById('grade'),
+      topic: document.getElementById('topic'),
+      level: document.getElementById('level'),
+      reset: document.getElementById('reset'),
+      grid: document.getElementById('tasksGrid')
+    };
+
+    function render(list){
+      els.grid.innerHTML = "";
+      if(!list.length){
+        els.grid.innerHTML = `<div class="muted">Ничего не найдено. Сбрось фильтры.</div>`;
+        return;
+      }
+      for(const t of list){
+        const card = document.createElement('div');
+        card.className = "card task";
+        card.innerHTML = `
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+            <p class="name">${t.name}</p>
+            <span class="tag">${t.level}</span>
+          </div>
+          <div class="line">
+            <span class="tag">${t.topic}</span>
+            <span class="tag">${t.grade}</span>
+            ${t.free ? `<span class="tag">free</span>` : `<span class="tag">paid</span>`}
+          </div>
+          <div class="muted" style="font-size:13px">
+            Условие: ${t.free ? "доступно" : "демо"} · Решение: ${t.free ? "демо/по подписке" : "по доступу"}
+          </div>
+          <div class="bottom">
+            <a class="btn" href="#" onclick="alert('Здесь будет страница задачи/условие (потом).')">Открыть</a>
+            <a class="btn primary" href="${LINKS.LK}">${t.free ? "Решение (ЛК)" : "Купить доступ"}</a>
+          </div>
+        `;
+        els.grid.appendChild(card);
+      }
+    }
+
+    function apply(){
+      const q = (els.q.value || "").trim().toLowerCase();
+      const grade = els.grade.value;
+      const topic = els.topic.value;
+      const level = els.level.value;
+
+      const filtered = TASKS.filter(t => {
+        if(grade && t.grade !== grade) return false;
+        if(topic && t.topic !== topic) return false;
+        if(level && t.level !== level) return false;
+        if(q){
+          const hay = (t.name + " " + t.topic + " " + t.grade + " " + t.level).toLowerCase();
+          if(!hay.includes(q)) return false;
+        }
+        return true;
+      });
+      render(filtered);
+    }
+
+    els.q.addEventListener('input', apply);
+    els.grade.addEventListener('change', apply);
+    els.topic.addEventListener('change', apply);
+    els.level.addEventListener('change', apply);
+    els.reset.addEventListener('click', () => {
+      els.q.value = "";
+      els.grade.value = "";
+      els.topic.value = "";
+      els.level.value = "";
+      apply();
+    });
+
+    render(TASKS);
+  </script>
+</body>
+</html>
