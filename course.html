@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Курс — Олимпиадная математика</title>
+  <style>
+    :root{
+      --bg:#0b0c10; --card:#11131a; --muted:#9aa3b2; --text:#e9eef7;
+      --line:#232635; --accent:#7c5cff; --accent2:#2ee59d;
+      --shadow: 0 10px 30px rgba(0,0,0,.35); --r:18px; --w:1080px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background: radial-gradient(1200px 600px at 30% -10%, rgba(124,92,255,.18), transparent 70%),
+                  radial-gradient(900px 500px at 80% 10%, rgba(46,229,157,.12), transparent 70%),
+                  var(--bg);
+      color:var(--text); line-height:1.35;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--w);margin:0 auto;padding:0 18px}
+    .top{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(11,12,16,.65);
+      border-bottom:1px solid rgba(35,38,53,.8);z-index:50}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .dot{width:10px;height:10px;border-radius:99px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 0 4px rgba(124,92,255,.12)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border:1px solid rgba(35,38,53,.9);
+      background:rgba(17,19,26,.6);border-radius:12px;cursor:pointer;transition:.15s ease;font-weight:650;font-size:14px}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(124,92,255,.55)}
+    .btn.primary{background:linear-gradient(135deg, rgba(124,92,255,.95), rgba(46,229,157,.85));border:0;color:#0b0c10}
+    .card{background:rgba(17,19,26,.72);border:1px solid rgba(35,38,53,.9);border-radius:var(--r);box-shadow:var(--shadow)}
+    header{padding:28px 0 10px}
+    .hero{padding:22px}
+    .kicker{color:var(--muted);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;margin-bottom:10px}
+    h1{margin:0 0 10px;font-size:34px;line-height:1.05}
+    .sub{margin:0;color:rgba(233,238,247,.82);font-size:15px;max-width:70ch}
+    .grid{display:grid;grid-template-columns:1fr .9fr;gap:12px;align-items:start}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    section{padding:10px 0 18px}
+    h2{margin:0 0 10px;font-size:18px}
+    .pill{display:inline-flex;gap:8px;padding:7px 10px;border-radius:999px;border:1px solid rgba(35,38,53,.9);
+      background:rgba(11,12,16,.35);color:rgba(233,238,247,.85);font-weight:700;font-size:13px}
+    .list{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+    .li{padding:12px 14px;border:1px solid rgba(35,38,53,.9);background:rgba(11,12,16,.25);border-radius:14px}
+    .muted{color:var(--muted)}
+    details{border:1px solid rgba(35,38,53,.9);background:rgba(11,12,16,.25);border-radius:14px;padding:12px 14px;margin:10px 0}
+    summary{cursor:pointer;font-weight:900;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+    summary::-webkit-details-marker{display:none}
+    .chev{width:10px;height:10px;border-right:2px solid rgba(233,238,247,.65);border-bottom:2px solid rgba(233,238,247,.65);
+      transform:rotate(-45deg);transition:.15s ease}
+    details[open] .chev{transform:rotate(45deg)}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="wrap">
+      <div class="row">
+        <div class="brand"><span class="dot"></span><span>Олимпиадная математика</span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn" href="index.html#courses">← Назад</a>
+          <a class="btn" href="index.html#tasks">Каталог задач</a>
+          <a class="btn primary" href="#">Купить</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="wrap">
+      <div class="card hero">
+        <div class="kicker">страница курса</div>
+        <h1 id="title">Курс “База + скорость”</h1>
+        <p class="sub" id="desc">Фундамент + тренировка. Много практики, “красивые ответы”, минимум воды.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+          <span class="pill" id="meta1">8–9 класс</span>
+          <span class="pill" id="meta2">12 занятий</span>
+          <span class="pill" id="meta3">ДЗ + разбор</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="grid">
+        <div class="card" style="padding:18px">
+          <h2>Что внутри</h2>
+          <ul class="list">
+            <li class="li">Занятия с видео + PDF (теория/листки)</li>
+            <li class="li">Домашка и задачи на закрепление</li>
+            <li class="li">Разбор ключевых приёмов и типовых ходов</li>
+          </ul>
+
+          <h2 style="margin-top:16px">Программа (аккордеон)</h2>
+          <details open>
+            <summary>Блок 1: ФСУ и разложения <span class="chev"></span></summary>
+            <div class="muted" style="margin-top:10px">Разность квадратов/кубов, свёртки, “схлопывание” длинных выражений.</div>
+          </details>
+          <details>
+            <summary>Блок 2: Делимость и остатки <span class="chev"></span></summary>
+            <div class="muted" style="margin-top:10px">Остатки, модульная арифметика, типовые конструкции.</div>
+          </details>
+          <details>
+            <summary>Блок 3: Комбинаторика/инварианты <span class="chev"></span></summary>
+            <div class="muted" style="margin-top:10px">Инварианты, процессы, подсчёт через дополнение.</div>
+          </details>
+        </div>
+
+        <div class="card" style="padding:18px">
+          <h2>Цена и доступ</h2>
+          <div class="li">
+            <div style="font-weight:900;font-size:16px">4 990 ₽</div>
+            <div class="muted" style="margin-top:6px">Доступ: 90 дней (поменяешь)</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+              <a class="btn primary" href="#">Купить</a>
+              <a class="btn" href="#">Войти</a>
+            </div>
+          </div>
+
+          <div style="margin-top:14px" class="muted">
+            Пока заглушки. Потом вставишь ссылки на оплату и ЛК.
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Можно открыть как: course.html?slug=base
+    const courses = {
+      base: {
+        title: 'Курс “База + скорость”',
+        desc: 'Фундамент + тренировка. Много практики, “красивые ответы”, минимум воды.',
+        meta: ['8–9 класс', '12 занятий', 'ДЗ + разбор']
+      },
+      mmo: {
+        title: 'Курс “ММО: техника решений”',
+        desc: 'Задачи уровня “№2”: структура решения, ход, оформление, практика.',
+        meta: ['8–9 класс', '10 занятий', 'Листки + разбор']
+      },
+      sub: {
+        title: 'Подписка “Каталог задач”',
+        desc: 'По темам/классам/сложности. Постоянные обновления.',
+        meta: ['Подписка', 'Каталог', 'Обновления']
+      }
+    };
+
+    const url = new URL(location.href);
+    const slug = url.searchParams.get('slug') || 'base';
+    const c = courses[slug] || courses.base;
+
+    document.getElementById('title').textContent = c.title;
+    document.getElementById('desc').textContent = c.desc;
+    document.getElementById('meta1').textContent = c.meta[0];
+    document.getElementById('meta2').textContent = c.meta[1];
+    document.getElementById('meta3').textContent = c.meta[2];
+  </script>
+</body>
+</html>
