@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Задача — Олимпиадная математика</title>
+  <style>
+    :root{
+      --bg:#0b0c10; --muted:#9aa3b2; --text:#e9eef7;
+      --line:#232635; --accent:#7c5cff; --accent2:#2ee59d;
+      --shadow: 0 10px 30px rgba(0,0,0,.35); --r:18px; --w:1080px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background: radial-gradient(1200px 600px at 30% -10%, rgba(124,92,255,.18), transparent 70%),
+                  radial-gradient(900px 500px at 80% 10%, rgba(46,229,157,.12), transparent 70%),
+                  var(--bg);
+      color:var(--text); line-height:1.35;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--w);margin:0 auto;padding:0 18px}
+    .top{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(11,12,16,.65);
+      border-bottom:1px solid rgba(35,38,53,.8);z-index:50}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .dot{width:10px;height:10px;border-radius:99px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 0 4px rgba(124,92,255,.12)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border:1px solid rgba(35,38,53,.9);
+      background:rgba(17,19,26,.6);border-radius:12px;cursor:pointer;transition:.15s ease;font-weight:650;font-size:14px}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(124,92,255,.55)}
+    .btn.primary{background:linear-gradient(135deg, rgba(124,92,255,.95), rgba(46,229,157,.85));border:0;color:#0b0c10}
+    .card{background:rgba(17,19,26,.72);border:1px solid rgba(35,38,53,.9);border-radius:var(--r);box-shadow:var(--shadow)}
+    header{padding:22px 0 10px}
+    .hero{padding:18px}
+    .kicker{color:var(--muted);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;margin-bottom:10px}
+    h1{margin:0 0 10px;font-size:28px;line-height:1.05}
+    .sub{margin:0;color:rgba(233,238,247,.82);font-size:14px;max-width:80ch}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .tag{display:inline-flex;padding:6px 8px;border-radius:999px;border:1px solid rgba(35,38,53,.9);
+      background:rgba(11,12,16,.35);color:rgba(233,238,247,.78);font-size:12px;font-weight:650}
+    main{padding:10px 0 28px}
+    h2{margin:0 0 10px;font-size:16px}
+    .block{padding:18px}
+    .muted{color:var(--muted)}
+    .hr{height:1px;background:rgba(35,38,53,.85);margin:14px 0}
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: rgba(11,12,16,.35);
+      border: 1px solid rgba(35,38,53,.9);
+      border-radius: 14px;
+      padding: 12px 14px;
+      overflow:auto;
+      white-space:pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="wrap">
+      <div class="row">
+        <div class="brand"><span class="dot"></span><span>Олимпиадная математика</span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn" href="index.html#tasks">← Назад к каталогу</a>
+          <a class="btn" href="index.html#courses">Курсы</a>
+          <a class="btn primary" href="#" id="buyBtn">Купить доступ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="wrap">
+      <div class="card hero">
+        <div class="kicker">страница задачи</div>
+        <h1 id="title">Задача</h1>
+        <p class="sub" id="subtitle">Описание</p>
+        <div class="meta">
+          <span class="tag" id="topic">Тема</span>
+          <span class="tag" id="grade">Класс</span>
+          <span class="tag" id="level">Сложность</span>
+          <span class="tag" id="access">Доступ</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="card block">
+        <h2>Условие</h2>
+        <div class="mono" id="statement"></div>
+
+        <div class="hr"></div>
+
+        <h2>Решение</h2>
+        <div id="solutionWrap" class="muted"></div>
+
+        <div class="hr"></div>
+
+        <div class="muted" style="font-size:13px">
+          Сейчас это офлайн-демо. Потом “Решение” можно скрывать и показывать только после оплаты/логина.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Заглушки ссылок (пока не трогаем)
+    const LINKS = { PAY: "#", LK: "#" };
+    document.getElementById('buyBtn').href = LINKS.PAY;
+
+    // Данные задач: можно расширять
+    const TASKS = [
+      {
+        id: 1,
+        name: "ФСУ-1. Схлопнуть выражение до константы",
+        topic: "ФСУ",
+        grade: "8-9",
+        level: "normal",
+        free: true,
+        statement:
+`Упростите выражение и найдите его значение:
+\\[
+\\frac{(x-5)^2 - (x-67)^2}{(x-5)-(x-67)}.
+\\]
+(Ответ не зависит от x.)`,
+        solution:
+`Это разность квадратов:
+((x-5)-(x-67))((x-5)+(x-67)) / ((x-5)-(x-67)).
+Сокращаем и получаем: (x-5)+(x-67)=2x-72.
+Но по условию “не зависит от x” — это пример-заглушка, позже заменишь на настоящую задачу с константой.`
+      },
+      {
+        id: 2,
+        name: "ФСУ-2. Произведение скобок = разложенный куб",
+        topic: "ФСУ",
+        grade: "8-9",
+        level: "hard",
+        free: false,
+        statement:
+`Решите уравнение:
+\\[
+(x-3)(x-5)(x+7) = x^3 - 9x^2 + 27x - 81.
+\\]
+`,
+        solution:
+`Платная часть (заглушка).
+В будущем тут будет решение, которое показывается только после покупки/логина.`
+      },
+      {
+        id: 3,
+        name: "Делимость-1. Остатки и разность степеней",
+        topic: "Делимость",
+        grade: "8-9",
+        level: "normal",
+        free: true,
+        statement:
+`Докажите, что число \\(67^{52} - 52^{67}\\) делится на \\(15\\).`,
+        solution:
+`Заглушка решения: проверяем делимость на 3 и 5 через сравнения по модулю.
+(Я позже заменю на нормальное решение под твой стиль.)`
+      }
+    ];
+
+    const url = new URL(location.href);
+    const id = Number(url.searchParams.get('id') || 1);
+    const t = TASKS.find(x => x.id === id) || TASKS[0];
+
+    document.getElementById('title').textContent = t.name;
+    document.getElementById('subtitle').textContent = "Открытая демо-страница задачи";
+    document.getElementById('topic').textContent = t.topic;
+    document.getElementById('grade').textContent = t.grade;
+    document.getElementById('level').textContent = t.level;
+    document.getElementById('access').textContent = t.free ? "free" : "paid";
+
+    document.getElementById('statement').textContent = t.statement;
+
+    const wrap = document.getElementById('solutionWrap');
+    if (t.free) {
+      wrap.className = "mono";
+      wrap.textContent = t.solution;
+    } else {
+      wrap.className = "muted";
+      wrap.innerHTML = `
+        Это платная задача. <br/><br/>
+        <a class="btn primary" href="${LINKS.PAY}">Купить доступ</a>
+        <a class="btn" style="margin-left:10px" href="${LINKS.LK}">Войти</a>
+      `;
+    }
+  </script>
+</body>
+</html>
